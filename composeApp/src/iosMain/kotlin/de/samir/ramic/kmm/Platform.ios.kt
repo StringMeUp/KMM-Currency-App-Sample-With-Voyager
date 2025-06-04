@@ -7,3 +7,9 @@ class IOSPlatform: Platform {
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()
+
+/** example expect class */
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
+actual class KoinPlatform actual constructor() {
+    actual val name: String =  UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+}

@@ -33,6 +33,8 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            /** Koin Android */
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -43,6 +45,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+
             /** Navigation Voyager */
             // Navigator
             implementation(libs.voyager.navigator)
@@ -56,7 +59,17 @@ kotlin {
             implementation(libs.voyager.transitions)
             // Koin integration
             implementation(libs.voyager.koin)
+
+            /** Koin */
+            implementation(libs.koin.core)
+            api(libs.koin.annotations)
+
         }
+
+        iosMain.dependencies {
+            
+        }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }

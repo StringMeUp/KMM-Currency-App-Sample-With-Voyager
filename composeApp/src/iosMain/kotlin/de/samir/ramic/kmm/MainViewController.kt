@@ -2,4 +2,7 @@ package de.samir.ramic.kmm
 
 import androidx.compose.ui.window.ComposeUIViewController
 
-fun MainViewController() = ComposeUIViewController { App() }
+fun MainViewController() = ComposeUIViewController {
+    initKoin()
+    App()
+}

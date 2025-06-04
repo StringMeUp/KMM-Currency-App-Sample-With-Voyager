@@ -7,3 +7,10 @@ class AndroidPlatform : Platform {
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
+
+/** example expect class */
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
+actual class KoinPlatform actual constructor() {
+    actual val name: String
+        get() = "Android ${Build.VERSION.SDK_INT}"
+}
