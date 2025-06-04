@@ -2,9 +2,12 @@ package de.samir.ramic.kmm
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.Navigator
+import de.samir.ramic.kmm.ui.MainScreenModel
 import de.samir.ramic.kmm.ui.WelcomeScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.mp.KoinPlatform.getKoin
 
 @Composable
 @Preview

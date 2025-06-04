@@ -1,3 +1,5 @@
+import java.net.URI
+
 rootProject.name = "KotlinMultiplatformSampleCMP"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
@@ -12,6 +14,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven(url = "https://maven.pkg.jetbrains.space/public/p/ktor/eap")
     }
 }
 
@@ -25,6 +28,7 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven(url = "https://maven.pkg.jetbrains.space/public/p/ktor/eap")
     }
 }
 

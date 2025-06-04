@@ -1,22 +1,31 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinxSerialization)
+}
+
+
+fun getLocalProperty(key: String, defaultValue: String = ""): String {
+    val props = Properties()
+    val localFile = rootProject.file("local.properties")
+    if (localFile.exists()) {
+        props.load(localFile.inputStream())
+    }
+    return props.getProperty(key) ?: defaultValue
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -27,15 +36,18 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             /** Koin Android */
             implementation(libs.koin.android)
+            /** Ktor i.e. Okhttp */
+            implementation(libs.ktor.client.okhttp)
         }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -63,11 +75,17 @@ kotlin {
             /** Koin */
             implementation(libs.koin.core)
             api(libs.koin.annotations)
-
+            /** Ktor i.e. Common */
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            /** Logging */
+            implementation(libs.ktor.client.logging)
         }
 
         iosMain.dependencies {
-            
+            /** Ktor i.e. Same as Okhttp called Darwin */
+            implementation(libs.ktor.client.darwin)
         }
 
         commonTest.dependencies {
@@ -92,11 +110,22 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
+        getByName("debug") {
+            buildConfigField("String", "API_KEY", "\"${getLocalProperty("api.key")}\"")
+        }
+
         getByName("release") {
             isMinifyEnabled = false
+            buildConfigField("String", "API_KEY", "\"${getLocalProperty("api.key")}\"")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

@@ -1,5 +1,6 @@
 package de.samir.ramic.kmm.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import de.samir.ramic.kmm.Description
 import de.samir.ramic.kmm.KoinPlatform
@@ -20,6 +22,10 @@ class WelcomeScreen() : Screen{
 
     @Composable
     override fun Content() {
+        val viewModel = rememberScreenModel(tag = "shared") {
+            getKoin().get<MainScreenModel>()
+        }
+
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center
