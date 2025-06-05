@@ -7,3 +7,16 @@ CURRENT_PROJECT_VERSION=1
 MARKETING_VERSION=1.0
 
 API_KEY=YOUR_API_KEY_HERE
+
+# iOS Local Config
+
+This project uses a local `Config.xcconfig` file for iOS build configuration.
+
+🚨 This file is NOT versioned (see `.gitignore`) and needs to be created manually.
+
+### Instructions:
+
+1. Copy the example file:
+
+   ```sh
+   cp iosApp/Configuration/Config.xcconfig.example iosApp/Configuration/Config.xcconfig
