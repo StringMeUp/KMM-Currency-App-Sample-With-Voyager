@@ -1,6 +1,6 @@
 package de.samir.ramic.kmm.data.repository
 
-import de.samir.ramic.kmm.data.CurrencyResponseDto
+import de.samir.ramic.kmm.data.model.CurrencyResponseDto
 import de.samir.ramic.kmm.data.RequestHandler
 import de.samir.ramic.kmm.data.api.ApiService
 import de.samir.ramic.kmm.domain.repository.Repository

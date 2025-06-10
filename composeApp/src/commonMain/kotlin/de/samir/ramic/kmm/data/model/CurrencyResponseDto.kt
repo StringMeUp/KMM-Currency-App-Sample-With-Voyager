@@ -1,7 +1,5 @@
-package de.samir.ramic.kmm.data
+package de.samir.ramic.kmm.data.model
 
-import CurrencyData
-import de.samir.ramic.kmm.data.MetaData
 import kotlinx.serialization.Serializable
 
 @Serializable

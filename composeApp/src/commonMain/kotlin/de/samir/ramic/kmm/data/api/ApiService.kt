@@ -1,6 +1,6 @@
 package de.samir.ramic.kmm.data.api
 
-import de.samir.ramic.kmm.data.CurrencyResponseDto
+import de.samir.ramic.kmm.data.model.CurrencyResponseDto
 
 interface ApiService {
     suspend fun getCurrency(): CurrencyResponseDto

@@ -1,4 +1,4 @@
-package de.samir.ramic.kmm.data
+package de.samir.ramic.kmm.data.model
 
 import kotlinx.serialization.Serializable
 

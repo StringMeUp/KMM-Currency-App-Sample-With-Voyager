@@ -1,6 +1,8 @@
-import de.samir.ramic.kmm.data.CurrencyDto
+package de.samir.ramic.kmm.data.model
+
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
 
 typealias AED = CurrencyDto
 typealias ARS = CurrencyDto
@@ -32,6 +34,7 @@ typealias RUB = CurrencyDto
 typealias SEK = CurrencyDto
 typealias THB = CurrencyDto
 typealias TRY = CurrencyDto
+
 
 @Serializable
 data class CurrencyData(
