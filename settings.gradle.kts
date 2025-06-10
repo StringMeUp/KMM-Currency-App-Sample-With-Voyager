@@ -1,5 +1,3 @@
-import java.net.URI
-
 rootProject.name = "KotlinMultiplatformSampleCMP"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 

@@ -15,7 +15,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -29,7 +28,7 @@ fun CurrencyEditText(hint: String = "") {
         verticalArrangement = Arrangement.spacedBy(2.dp),
         horizontalAlignment = Alignment.Start
     ) {
-        Text(hint, color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.Light)
+        Text(hint, color = Color.White, style = LocalAppTypography.current.body())
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = text,
@@ -38,8 +37,9 @@ fun CurrencyEditText(hint: String = "") {
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White,
                 focusedBorderColor = OxfordBlue,
-                unfocusedTextColor = Color.White
-            )
+                unfocusedBorderColor = Color.White
+            ),
+            textStyle = LocalAppTypography.current.body().copy(fontSize = 18.sp)
         )
     }
 }

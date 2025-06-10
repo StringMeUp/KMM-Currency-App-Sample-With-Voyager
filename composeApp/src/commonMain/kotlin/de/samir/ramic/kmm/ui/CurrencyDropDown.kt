@@ -35,7 +35,7 @@ import org.jetbrains.compose.resources.painterResource
 fun CurrencyDropdown(hint: String = "Hint", currency: String = "USD") {
     Column(modifier = Modifier.wrapContentSize()) {
         var isVisible by remember { mutableStateOf(false) }
-        Text(hint, fontSize = 14.sp, color = Color.White, fontWeight = FontWeight.Light)
+        Text(hint, style = LocalAppTypography.current.body(), color = Color.White)
 
         Row(
             modifier = Modifier
@@ -56,7 +56,7 @@ fun CurrencyDropdown(hint: String = "Hint", currency: String = "USD") {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(modifier = Modifier.weight(1f), text = currency, color = ReisinBlack, fontWeight = FontWeight.Medium)
+            Text(modifier = Modifier.weight(1f), text = currency, style = LocalAppTypography.current.body().copy(fontWeight = FontWeight.SemiBold, color = OxfordBlue))
             Image(
                 painterResource(Res.drawable.ic_arrow_down),
                 modifier = Modifier.size(24.dp),
@@ -69,11 +69,11 @@ fun CurrencyDropdown(hint: String = "Hint", currency: String = "USD") {
                 onDismissRequest = { isVisible = false }
             ) {
                 DropdownMenuItem(
-                    text = { Text("Option 1") },
+                    text = { Text("Option 1", style = LocalAppTypography.current.body()) },
                     onClick = { /* Do something... */ }
                 )
                 DropdownMenuItem(
-                    text = { Text("Option 2") },
+                    text = { Text("Option 2", style = LocalAppTypography.current.body()) },
                     onClick = { /* Do something... */ }
                 )
             }

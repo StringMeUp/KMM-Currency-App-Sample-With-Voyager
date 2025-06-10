@@ -1,6 +1,11 @@
 package de.samir.ramic.kmm.ui
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import kotlinmultiplatformsamplecmp.composeapp.generated.resources.Res
+import kotlinmultiplatformsamplecmp.composeapp.generated.resources.ic_arrow_down
 
 val LightBlue = Color(0xFF1BE7FF)
 val MintGreen = Color(0xFF6EEB83)
