@@ -3,6 +3,8 @@ package de.samir.ramic.kmm.ui
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
+import de.samir.ramic.kmm.ui.theme.OxfordBlue
+import de.samir.ramic.kmm.ui.theme.UclaBlue
 
 fun Modifier.curvedBottomShape(): Modifier = this.drawBehind {
     val width = size.width

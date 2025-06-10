@@ -68,4 +68,11 @@ data class CurrencyData(
     @SerialName("IDR") val idr: IDR,     // Indonesian Rupiah
     @SerialName("THB") val thb: THB,     // Thai Baht
     @SerialName("XAU") val xau: XAU      // Gold (oz)
-)
+) {
+    val allCurrencies
+        get() = listOf(
+            bam, usd, eur, btc, eth, usdt, usdc, gbp, chf, jpy,
+            aud, cad, cny, hkd, inr, rub, brl, mxn, krw, try_,
+            pln, sek, nok, dkk, aed, zar, ars, idr, thb, xau
+        )
+}

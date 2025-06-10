@@ -9,6 +9,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import de.samir.ramic.kmm.Description
 import de.samir.ramic.kmm.KoinPlatform
+import de.samir.ramic.kmm.ui.theme.SoftPaper
 import org.koin.mp.KoinPlatform.getKoin
 
 

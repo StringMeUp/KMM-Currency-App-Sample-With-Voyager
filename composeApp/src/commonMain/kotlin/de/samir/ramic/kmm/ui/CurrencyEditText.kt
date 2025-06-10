@@ -17,6 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import de.samir.ramic.kmm.ui.theme.LocalAppTypography
+import de.samir.ramic.kmm.ui.theme.OxfordBlue
+import de.samir.ramic.kmm.ui.theme.SystemHiglight
 
 @Composable
 fun CurrencyEditText(hint: String = "") {
@@ -28,7 +31,7 @@ fun CurrencyEditText(hint: String = "") {
         verticalArrangement = Arrangement.spacedBy(2.dp),
         horizontalAlignment = Alignment.Start
     ) {
-        Text(hint, color = Color.White, style = LocalAppTypography.current.body())
+        Text(hint, color = Color.White, style = LocalAppTypography.current.regular())
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = text,
@@ -36,10 +39,11 @@ fun CurrencyEditText(hint: String = "") {
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White,
-                focusedBorderColor = OxfordBlue,
+                focusedBorderColor = SystemHiglight,
                 unfocusedBorderColor = Color.White
             ),
-            textStyle = LocalAppTypography.current.body().copy(fontSize = 18.sp)
+            textStyle = LocalAppTypography.current.regular()
+                .copy(fontSize = 18.sp, color = Color.Black)
         )
     }
 }

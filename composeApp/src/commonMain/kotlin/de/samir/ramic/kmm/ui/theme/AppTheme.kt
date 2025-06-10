@@ -1,4 +1,4 @@
-package de.samir.ramic.kmm.ui
+package de.samir.ramic.kmm.ui.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider

@@ -1,11 +1,6 @@
-package de.samir.ramic.kmm.ui
+package de.samir.ramic.kmm.ui.theme
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import kotlinmultiplatformsamplecmp.composeapp.generated.resources.Res
-import kotlinmultiplatformsamplecmp.composeapp.generated.resources.ic_arrow_down
 
 val LightBlue = Color(0xFF1BE7FF)
 val MintGreen = Color(0xFF6EEB83)
@@ -22,6 +17,8 @@ val BlueyBlue = Color(0xFFA1E3D8)
 val Amber = Color(0xFFFFC107)
 val SoftPeach = Color(0xFFFFB74D)
 val SoftPaper = Color(0xFFFAFAFA)
+val SystemGray = Color(0xFF262626)
+val SystemHiglight = Color(0xFF623DE7)
 
 val LightColorScheme = androidx.compose.material3.lightColorScheme(
     primary = OxfordBlue,

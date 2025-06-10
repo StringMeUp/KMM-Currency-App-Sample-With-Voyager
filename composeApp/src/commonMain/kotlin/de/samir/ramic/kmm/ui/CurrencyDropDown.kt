@@ -26,7 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import de.samir.ramic.kmm.ui.theme.LocalAppTypography
+import de.samir.ramic.kmm.ui.theme.OxfordBlue
+import de.samir.ramic.kmm.ui.theme.SoftPaper
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.Res
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.ic_arrow_down
 import org.jetbrains.compose.resources.painterResource

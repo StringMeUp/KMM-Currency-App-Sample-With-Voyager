@@ -24,6 +24,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import de.samir.ramic.kmm.ui.theme.OxfordBlue
+import de.samir.ramic.kmm.ui.theme.UclaBlue
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.Res
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.ic_swap_horizontal
 import org.jetbrains.compose.resources.painterResource
