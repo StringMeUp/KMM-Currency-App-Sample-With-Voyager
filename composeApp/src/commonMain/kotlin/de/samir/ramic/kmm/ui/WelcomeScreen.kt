@@ -24,7 +24,6 @@ class WelcomeScreen() : Screen {
         }
 
         Column(modifier = Modifier.fillMaxSize().background(SoftPaper)) {
-            CurrencyHeader()
         }
     }
 }

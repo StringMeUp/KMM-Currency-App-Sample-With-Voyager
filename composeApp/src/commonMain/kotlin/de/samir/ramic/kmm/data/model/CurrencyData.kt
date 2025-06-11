@@ -71,7 +71,7 @@ data class CurrencyData(
 ) {
     val allCurrencies
         get() = listOf(
-            bam, usd, eur, btc, eth, usdt, usdc, gbp, chf, jpy,
+            usd, bam, eur, btc, eth, usdt, usdc, gbp, chf, jpy,
             aud, cad, cny, hkd, inr, rub, brl, mxn, krw, try_,
             pln, sek, nok, dkk, aed, zar, ars, idr, thb, xau
         )

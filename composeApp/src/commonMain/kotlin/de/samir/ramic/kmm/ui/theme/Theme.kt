@@ -17,8 +17,10 @@ val BlueyBlue = Color(0xFFA1E3D8)
 val Amber = Color(0xFFFFC107)
 val SoftPeach = Color(0xFFFFB74D)
 val SoftPaper = Color(0xFFFAFAFA)
-val SystemGray = Color(0xFF262626)
-val SystemHiglight = Color(0xFF623DE7)
+val SystemGray = Color(0xFF535353)
+val SystemGray2 = Color(0xFF181818)
+val SystemBackground = Color(0xFF111111)
+val SystemHiglight = Color(0xFFB14E3F)
 
 val LightColorScheme = androidx.compose.material3.lightColorScheme(
     primary = OxfordBlue,

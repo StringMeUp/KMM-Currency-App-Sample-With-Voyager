@@ -10,6 +10,7 @@ import kotlinmultiplatformsamplecmp.composeapp.generated.resources.Res
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.roboto_light
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.roboto_medium
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.roboto_regular
+import kotlinmultiplatformsamplecmp.composeapp.generated.resources.roboto_semibold
 import org.jetbrains.compose.resources.Font
 
 object AppTypography {
@@ -30,6 +31,13 @@ object AppTypography {
     )
 
     @Composable
+    fun bodySemiBold(): TextStyle = TextStyle(
+        fontFamily = FontFamily(Font(resource = Res.font.roboto_semibold)),
+        fontSize = 16.sp,
+        color = Color.White
+    )
+
+    @Composable
     fun regular(): TextStyle = TextStyle(
         fontFamily = FontFamily(Font(resource = Res.font.roboto_regular)),
         fontSize = 14.sp,
@@ -38,9 +46,16 @@ object AppTypography {
 
     @Composable
     fun caption(): TextStyle = TextStyle(
-        fontFamily = FontFamily(Font(resource = Res.font.roboto_regular, FontWeight.Normal)),
+        fontFamily = FontFamily(Font(resource = Res.font.roboto_regular)),
         fontSize = 12.sp,
         fontWeight = FontWeight.Light,
+        color = Color.White
+    )
+
+    @Composable
+    fun captionSemiBold(): TextStyle = TextStyle(
+        fontFamily = FontFamily(Font(resource = Res.font.roboto_semibold)),
+        fontSize = 12.sp,
         color = Color.White
     )
 }
