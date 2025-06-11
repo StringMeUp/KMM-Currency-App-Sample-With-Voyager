@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,21 +28,38 @@ import de.samir.ramic.kmm.ui.theme.SystemGray2
 import de.samir.ramic.kmm.ui.theme.SystemHiglight
 
 @Composable
-fun CurrencyEditText(textAlign: TextAlign = TextAlign.Left) {
-    var text by remember { mutableStateOf("0") }
-
+fun CurrencyEditText(
+    text: String = "0.0",
+    isEnabled: Boolean = true,
+    textAlign: TextAlign = TextAlign.Start,
+    onTextChange: (String) -> Unit = {}
+) {
     BasicTextField(
-        modifier = Modifier.fillMaxWidth(),
         value = text,
-        onValueChange = { text = it },
-        singleLine = true,
-        textStyle = LocalAppTypography.current.regular().copy(fontSize = 46.sp, color = Color.Black, textAlign = textAlign),
+        onValueChange = { input ->
+//            if (input.isEmpty() || input.matches(Regex("^\\d*\\.?\\d*\$"))) {
+                onTextChange(input)
+//            }
+        },
+        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Decimal),
+        textStyle = LocalAppTypography.current.regular().copy(
+            fontSize = 46.sp,
+            color = Color.Black
+        ),
+        enabled = isEnabled,
         cursorBrush = SolidColor(SystemHiglight),
+        modifier = Modifier
+            .wrapContentWidth()
+            .padding(4.dp),
+        singleLine = true,
         decorationBox = { innerTextField ->
             Column(
-                modifier = Modifier.fillMaxWidth()
-                    .background(shape = RoundedCornerShape(6.dp), color = Color.White)
-                    .padding(start = 4.dp, end = 4.dp)
+                modifier = Modifier
+                    .background(
+                        shape = RoundedCornerShape(6.dp),
+                        color = Color.White
+                    )
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
             ) {
                 innerTextField()
             }

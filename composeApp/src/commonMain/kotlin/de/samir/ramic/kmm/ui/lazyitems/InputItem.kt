@@ -13,12 +13,31 @@ import de.samir.ramic.kmm.ui.CurrencyDropdown
 import de.samir.ramic.kmm.ui.CurrencyEditText
 
 @Composable
-fun InputItem(currencies: List<CurrencyDto>, textAlign: TextAlign = TextAlign.Start, alignment: Alignment.Horizontal = Alignment.Start) {
+fun InputItem(
+    currencies: List<CurrencyDto>,
+    isEnabled: Boolean = true,
+    selectedCurrency: CurrencyDto,
+    value: String,
+    textAlign: TextAlign = TextAlign.Start,
+    alignment: Alignment.Horizontal = Alignment.Start,
+    onTextChange: (text: String) -> Unit = {},
+    onCurrencySelected: (currency: CurrencyDto) -> Unit = {}
+) {
     Column(
         modifier = Modifier.padding(start = 24.dp, end = 24.dp).fillMaxWidth(),
         horizontalAlignment = alignment
     ) {
-        CurrencyDropdown("USD", currencies = currencies)
-        CurrencyEditText(textAlign = textAlign)
+        CurrencyDropdown(
+            currency = selectedCurrency.code,
+            currencies = currencies,
+            onCurrencySelected = onCurrencySelected
+        )
+
+        CurrencyEditText(
+            text = value,
+            isEnabled = isEnabled,
+            textAlign = textAlign,
+            onTextChange = onTextChange
+        )
     }
 }

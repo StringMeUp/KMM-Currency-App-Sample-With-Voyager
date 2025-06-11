@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.model.rememberScreenModel
@@ -20,7 +19,7 @@ import de.samir.ramic.kmm.ui.lazyitems.SwitchItem
 import de.samir.ramic.kmm.ui.theme.SystemBackground
 import org.koin.mp.KoinPlatform.getKoin
 
-class MainScreen() : Screen {
+class MainScreen : Screen {
     @Composable
     override fun Content() {
 
@@ -28,11 +27,12 @@ class MainScreen() : Screen {
             getKoin().get<MainScreenModel>()
         }
 
-        val currencies by viewModel.currencies.collectAsStateWithLifecycle()
+        val currencyState by viewModel.currencyState.collectAsStateWithLifecycle()
 
         Scaffold(topBar = { AppBar() }) { padding ->
             LazyColumn(
-                modifier = Modifier.padding(padding).fillMaxSize().background(SystemBackground).padding(24.dp),
+                modifier = Modifier.padding(padding).fillMaxSize().background(SystemBackground)
+                    .padding(24.dp),
                 horizontalAlignment = Alignment.Start
             ) {
 
@@ -41,11 +41,24 @@ class MainScreen() : Screen {
                 }
 
                 item {
-                    InputItem(currencies)
+                    InputItem(
+                        currencies = currencyState.currencies,
+                        selectedCurrency = currencyState.sourceValue,
+                        value = currencyState.sourceText,
+                        onCurrencySelected = {
+                            currencyState.sourceValue = it
+                        },
+                        onTextChange = {
+                            currencyState.setSource(it)
+                            currencyState.convert()
+                        }
+                    )
                 }
 
                 item {
-                    SwitchItem()
+                    SwitchItem {
+                        currencyState.swap()
+                    }
                 }
 
                 item {
@@ -55,7 +68,17 @@ class MainScreen() : Screen {
                 }
 
                 item {
-                    InputItem(currencies)
+                    InputItem(
+                        currencies = currencyState.currencies,
+                        isEnabled = false,
+                        selectedCurrency = currencyState.targetValue,
+                        value = currencyState.targetText,
+                        onCurrencySelected = {
+                            currencyState.targetValue = it
+                        },
+                        onTextChange = {
+                            currencyState.setTarget(it)
+                        })
                 }
             }
         }

@@ -11,9 +11,9 @@ class RepositoryImpl(
     private val apiService: ApiService
 ) : Repository {
 
-    override suspend fun getCurrency(): Result<CurrencyResponseDto> {
+    override suspend fun getCurrencies(): Result<CurrencyResponseDto> {
         return requestHandler.makeSafeApiCall {
-            apiService.getCurrency()
+            apiService.getCurrencies()
         }
     }
 }

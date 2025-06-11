@@ -17,6 +17,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,8 +39,10 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun CurrencyDropdown(
     currency: String = "USD",
-    currencies: List<CurrencyDto> = listOf()
+    currencies: List<CurrencyDto> = listOf(),
+    onCurrencySelected: (currency: CurrencyDto) -> Unit = {}
 ) {
+
     Column(modifier = Modifier.wrapContentSize()) {
         var isVisible by remember { mutableStateOf(false) }
 
@@ -93,7 +96,9 @@ fun CurrencyDropdown(
                                 )
                             }
                         },
-                        onClick = { /* Do something... */ }
+                        onClick = {
+                            onCurrencySelected(it)
+                        }
                     )
                 }
             }

@@ -32,14 +32,17 @@ import kotlinmultiplatformsamplecmp.composeapp.generated.resources.swap_vertical
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun SwitchItem() {
-    Row(modifier = Modifier.padding(24.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+fun SwitchItem(onSwitchPressed: () -> Unit = {}) {
+    Row(
+        modifier = Modifier.padding(24.dp).fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center
+    ) {
         Button(
             shape = RoundedCornerShape(6.dp),
             modifier = Modifier.wrapContentSize(),
             colors = ButtonDefaults.buttonColors(containerColor = SystemGray2),
             border = BorderStroke(1.dp, SystemHiglight),
-            onClick = {}) {
+            onClick = { onSwitchPressed() }) {
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically

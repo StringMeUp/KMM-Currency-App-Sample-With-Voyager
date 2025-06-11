@@ -8,7 +8,7 @@ import io.ktor.client.request.get
 
 class ApiServiceImpl(private val client: HttpClient) : ApiService {
 
-    override suspend fun getCurrency(): CurrencyResponseDto {
+    override suspend fun getCurrencies(): CurrencyResponseDto {
        return client.get(Endpoint.CURRENCY_LATEST).body()
     }
 }
