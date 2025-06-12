@@ -22,23 +22,45 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
     ) {
         var sourceValue by mutableStateOf(CurrencyDto("USD", 0.0))
         var targetValue by mutableStateOf(CurrencyDto("EUR", 0.0))
-        var sourceConversionValue by mutableStateOf<Double?>(null)
-        var targetConversionValue by mutableStateOf<Double?>(null)
+        private var sourceConversionValue by mutableStateOf<Double?>(null)
+        private var targetConversionValue by mutableStateOf<Double?>(null)
 
-        var sourceText by mutableStateOf("0.0")
-        var targetText by mutableStateOf("0.0")
+        var sourceInputText by mutableStateOf("0.0")
+        var targetInputText by mutableStateOf("0.0")
 
         fun setSource(source: String) {
-            sourceText = source
+            sourceInputText = source
         }
 
         fun setTarget(target: String) {
-            targetText = target
+            targetInputText = target
         }
 
-        fun convert() {
-            targetConversionValue = sourceText.toDoubleOrNull()?.times(targetValue.value)
-            setTarget("$targetConversionValue")
+        fun convertSourceToTarget() {
+            val amount = sourceInputText.toDoubleOrNull() ?: return
+
+            targetConversionValue = if (sourceValue.code == "USD") {
+                amount * targetValue.value
+            } else {
+                val rate = targetValue.value / sourceValue.value
+                amount * rate
+            }
+
+            setTarget(targetConversionValue.toString())
+        }
+
+
+        fun convertTargetToSource() {
+            val amount = targetInputText.toDoubleOrNull() ?: return
+
+            sourceConversionValue = if (targetValue.code == "USD") {
+                amount * sourceValue.value
+            } else {
+                val rate = sourceValue.value / targetValue.value
+                amount * rate
+            }
+
+            setSource(sourceConversionValue.toString())
         }
 
         fun swap() {
@@ -46,9 +68,9 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
             sourceValue = targetValue
             targetValue = temp
 
-            val tempSourceText = sourceText
-            sourceText = targetText
-            targetText = tempSourceText
+            val tempSourceText = sourceInputText
+            sourceInputText = targetInputText
+            targetInputText = tempSourceText
         }
     }
 
@@ -64,13 +86,14 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
     private fun getCurrencies() {
         screenModelScope.launch {
             val resultCurrencies = repository.getCurrencies()
-            resultCurrencies.onSuccess {
-                val updated = CurrencyState(it.data.allCurrencies).also {
+            resultCurrencies.onSuccess { responseDto ->
+                val updated = CurrencyState(responseDto.data.allCurrencies).also {
                     it.sourceValue = it.currencies.first()
                     it.targetValue = it.currencies.find { it.code == "EUR" } ?: it.currencies.last()
                 }
+
                 _currencyState.value = updated
-                println("Success: $it")
+                println("Success: $responseDto")
             }
             resultCurrencies.onFailure { println("Error: ${it.message}") }
         }

@@ -44,13 +44,13 @@ class MainScreen : Screen {
                     InputItem(
                         currencies = currencyState.currencies,
                         selectedCurrency = currencyState.sourceValue,
-                        value = currencyState.sourceText,
+                        value = currencyState.sourceInputText,
                         onCurrencySelected = {
                             currencyState.sourceValue = it
                         },
                         onTextChange = {
                             currencyState.setSource(it)
-                            currencyState.convert()
+                            currencyState.convertSourceToTarget()
                         }
                     )
                 }
@@ -70,14 +70,15 @@ class MainScreen : Screen {
                 item {
                     InputItem(
                         currencies = currencyState.currencies,
-                        isEnabled = false,
+                        isEnabled = true,
                         selectedCurrency = currencyState.targetValue,
-                        value = currencyState.targetText,
+                        value = currencyState.targetInputText,
                         onCurrencySelected = {
                             currencyState.targetValue = it
                         },
                         onTextChange = {
                             currencyState.setTarget(it)
+                            currencyState.convertTargetToSource()
                         })
                 }
             }
