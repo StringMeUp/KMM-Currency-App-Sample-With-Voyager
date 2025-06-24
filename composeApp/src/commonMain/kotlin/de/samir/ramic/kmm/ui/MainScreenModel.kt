@@ -25,8 +25,8 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
         private var sourceConversionValue by mutableStateOf<Double?>(null)
         private var targetConversionValue by mutableStateOf<Double?>(null)
 
-        var sourceInputText by mutableStateOf("0.0")
-        var targetInputText by mutableStateOf("0.0")
+        var sourceInputText by mutableStateOf("")
+        var targetInputText by mutableStateOf("")
 
         fun setSource(source: String) {
             sourceInputText = source
