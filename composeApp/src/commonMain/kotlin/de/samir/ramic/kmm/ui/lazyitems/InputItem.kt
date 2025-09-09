@@ -11,13 +11,15 @@ import androidx.compose.ui.unit.dp
 import de.samir.ramic.kmm.data.model.CurrencyDto
 import de.samir.ramic.kmm.ui.CurrencyDropdown
 import de.samir.ramic.kmm.ui.CurrencyEditText
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
+@Preview
 fun InputItem(
-    currencies: List<CurrencyDto>,
+    currencies: List<CurrencyDto> = listOf(),
     isEnabled: Boolean = true,
-    selectedCurrency: CurrencyDto,
-    value: String,
+    selectedCurrency: CurrencyDto = CurrencyDto("", 0.0),
+    value: String = "",
     textAlign: TextAlign = TextAlign.Start,
     alignment: Alignment.Horizontal = Alignment.Start,
     onTextChange: (text: String) -> Unit = {},

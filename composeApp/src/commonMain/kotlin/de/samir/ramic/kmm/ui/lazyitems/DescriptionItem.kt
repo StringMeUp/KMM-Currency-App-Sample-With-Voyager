@@ -13,8 +13,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import de.samir.ramic.kmm.ui.theme.LocalAppTypography
 import de.samir.ramic.kmm.ui.theme.SystemGray
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
+@Preview()
 fun DescriptionItem(
     titleText: String = "",
     descriptionText: String = "",

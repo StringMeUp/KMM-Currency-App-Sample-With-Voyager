@@ -30,8 +30,10 @@ import de.samir.ramic.kmm.ui.theme.SystemHiglight
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.Res
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.swap_vertical_variant
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
+@Preview()
 fun SwitchItem(onSwitchPressed: () -> Unit = {}) {
     Row(
         modifier = Modifier.padding(24.dp).fillMaxWidth(),

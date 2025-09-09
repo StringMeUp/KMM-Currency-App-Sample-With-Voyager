@@ -6,6 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import com.ionspin.kotlin.bignum.decimal.BigDecimal
+import com.ionspin.kotlin.bignum.decimal.RoundingMode
 import de.samir.ramic.kmm.data.model.CurrencyDto
 import de.samir.ramic.kmm.domain.repository.Repository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,6 +39,7 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
         }
 
         fun convertSourceToTarget() {
+            if (sourceInputText.isEmpty()) setTarget("")
             val amount = sourceInputText.toDoubleOrNull() ?: return
 
             targetConversionValue = if (sourceValue.code == "USD") {
@@ -46,7 +49,9 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
                 amount * rate
             }
 
-            setTarget(targetConversionValue.toString())
+            val bdV = BigDecimal.fromDouble(targetConversionValue ?: 0.0)
+            val scaled = bdV.roundToDigitPositionAfterDecimalPoint(4, RoundingMode.ROUND_HALF_AWAY_FROM_ZERO)
+            setTarget(scaled.toPlainString())
         }
 
 
@@ -60,7 +65,9 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
                 amount * rate
             }
 
-            setSource(sourceConversionValue.toString())
+            val bdV = BigDecimal.fromDouble(sourceConversionValue ?: 0.0)
+            val scaled = bdV.roundToDigitPositionAfterDecimalPoint(4, RoundingMode.ROUND_HALF_AWAY_FROM_ZERO)
+            setSource(scaled.toPlainString())
         }
 
         fun swap() {

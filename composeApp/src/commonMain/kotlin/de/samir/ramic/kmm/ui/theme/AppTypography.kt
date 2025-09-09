@@ -8,7 +8,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.Res
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.roboto_light
-import kotlinmultiplatformsamplecmp.composeapp.generated.resources.roboto_medium
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.roboto_regular
 import kotlinmultiplatformsamplecmp.composeapp.generated.resources.roboto_semibold
 import org.jetbrains.compose.resources.Font
