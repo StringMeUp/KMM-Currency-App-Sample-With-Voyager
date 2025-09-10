@@ -29,9 +29,11 @@ class MainScreen : Screen {
 
         val currencyState by viewModel.currencyState.collectAsStateWithLifecycle()
 
-        Scaffold(topBar = { AppBar() }) { padding ->
+        Scaffold(topBar = { AppBar(currencyState.lastUpdatedAt) }) { padding ->
             LazyColumn(
-                modifier = Modifier.padding(padding).fillMaxSize().background(SystemBackground)
+                modifier = Modifier.padding(padding)
+                    .fillMaxSize()
+                    .background(SystemBackground)
                     .padding(24.dp),
                 horizontalAlignment = Alignment.Start
             ) {
@@ -43,10 +45,10 @@ class MainScreen : Screen {
                 item {
                     InputItem(
                         currencies = currencyState.currencies,
-                        selectedCurrency = currencyState.sourceValue,
+                        selectedCurrency = currencyState.sourceCurrencyCode,
                         value = currencyState.sourceInputText,
                         onCurrencySelected = {
-                            currencyState.sourceValue = it
+                            currencyState.sourceCurrencyCode = it
                         },
                         onTextChange = {
                             currencyState.setSource(it)
@@ -71,10 +73,10 @@ class MainScreen : Screen {
                     InputItem(
                         currencies = currencyState.currencies,
                         isEnabled = true,
-                        selectedCurrency = currencyState.targetValue,
+                        selectedCurrency = currencyState.targetCurrencyCode,
                         value = currencyState.targetInputText,
                         onCurrencySelected = {
-                            currencyState.targetValue = it
+                            currencyState.targetCurrencyCode = it
                         },
                         onTextChange = {
                             currencyState.setTarget(it)

@@ -81,7 +81,8 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             /** Logging */
             implementation(libs.ktor.client.logging)
-            implementation("com.ionspin.kotlin:bignum:0.3.10")
+            implementation(libs.bignum)
+            implementation(libs.kotlinx.datetime)
         }
 
         iosMain.dependencies {

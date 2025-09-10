@@ -10,11 +10,14 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import com.ionspin.kotlin.bignum.decimal.RoundingMode
 import de.samir.ramic.kmm.data.model.CurrencyDto
 import de.samir.ramic.kmm.domain.repository.Repository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.datetime.format
 
 class MainScreenModel(private val repository: Repository) : ScreenModel {
 
@@ -22,13 +25,14 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
     class CurrencyState(
         val currencies: List<CurrencyDto> = listOf()
     ) {
-        var sourceValue by mutableStateOf(CurrencyDto("USD", 0.0))
-        var targetValue by mutableStateOf(CurrencyDto("EUR", 0.0))
+        var sourceCurrencyCode by mutableStateOf(CurrencyDto("USD", 0.0))
+        var targetCurrencyCode by mutableStateOf(CurrencyDto("EUR", 0.0))
         private var sourceConversionValue by mutableStateOf<Double?>(null)
         private var targetConversionValue by mutableStateOf<Double?>(null)
 
         var sourceInputText by mutableStateOf("")
         var targetInputText by mutableStateOf("")
+        var lastUpdatedAt by mutableStateOf("")
 
         fun setSource(source: String) {
             sourceInputText = source
@@ -42,10 +46,10 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
             if (sourceInputText.isEmpty()) setTarget("")
             val amount = sourceInputText.toDoubleOrNull() ?: return
 
-            targetConversionValue = if (sourceValue.code == "USD") {
-                amount * targetValue.value
+            targetConversionValue = if (sourceCurrencyCode.code == "USD") {
+                amount * targetCurrencyCode.value
             } else {
-                val rate = targetValue.value / sourceValue.value
+                val rate = targetCurrencyCode.value / sourceCurrencyCode.value
                 amount * rate
             }
 
@@ -58,10 +62,10 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
         fun convertTargetToSource() {
             val amount = targetInputText.toDoubleOrNull() ?: return
 
-            sourceConversionValue = if (targetValue.code == "USD") {
-                amount * sourceValue.value
+            sourceConversionValue = if (targetCurrencyCode.code == "USD") {
+                amount * sourceCurrencyCode.value
             } else {
-                val rate = sourceValue.value / targetValue.value
+                val rate = sourceCurrencyCode.value / targetCurrencyCode.value
                 amount * rate
             }
 
@@ -71,9 +75,9 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
         }
 
         fun swap() {
-            val temp = sourceValue
-            sourceValue = targetValue
-            targetValue = temp
+            val temp = sourceCurrencyCode
+            sourceCurrencyCode = targetCurrencyCode
+            targetCurrencyCode = temp
 
             val tempSourceText = sourceInputText
             sourceInputText = targetInputText
@@ -91,12 +95,13 @@ class MainScreenModel(private val repository: Repository) : ScreenModel {
     }
 
     private fun getCurrencies() {
-        screenModelScope.launch {
+        screenModelScope.launch(Dispatchers.IO) {
             val resultCurrencies = repository.getCurrencies()
             resultCurrencies.onSuccess { responseDto ->
                 val updated = CurrencyState(responseDto.data.allCurrencies).also {
-                    it.sourceValue = it.currencies.first()
-                    it.targetValue = it.currencies.find { it.code == "EUR" } ?: it.currencies.last()
+                    it.sourceCurrencyCode = it.currencies.first()
+                    it.targetCurrencyCode = it.currencies.find { it.code == "EUR" } ?: it.currencies.last()
+                    it.lastUpdatedAt = responseDto.meta.formattedUpdateTime
                 }
 
                 _currencyState.value = updated

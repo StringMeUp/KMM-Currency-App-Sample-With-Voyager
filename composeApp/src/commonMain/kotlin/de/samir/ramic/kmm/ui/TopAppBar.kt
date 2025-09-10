@@ -23,7 +23,7 @@ import de.samir.ramic.kmm.ui.theme.SystemHiglight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar() {
+fun AppBar(lastUpdatedAt: String = "") {
     Box {
         TopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(containerColor = SystemGray),
@@ -42,7 +42,7 @@ fun AppBar() {
 
                     Text(
                         modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp),
-                        text = "Last updated at: 21.11.1988",
+                        text = lastUpdatedAt,
                         style = LocalAppTypography.current.caption()
                             .copy(textAlign = TextAlign.Center, fontSize = 16.sp)
                     )
